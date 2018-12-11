@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Header, MovieList, MovieDetails, Loading, SearchBar } from './components';
-import apiMovie from './conf/api.movie';
-import { parseApiMovie } from './utils/api.movie.tools';
+import apiMovie, { apiMovieMap } from './conf/api.movie';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +21,7 @@ class App extends Component {
     apiMovie.get('/discover/movie')
             .then( response => response.data.results )
             .then( moviesApi => {
-              const movies = moviesApi.map(parseApiMovie)
+              const movies = moviesApi.map(apiMovieMap)
               this.updateMovies(movies);
             })
             .catch( err => console.log(err));
